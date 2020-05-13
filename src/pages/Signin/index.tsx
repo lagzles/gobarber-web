@@ -12,7 +12,6 @@ import Input from '../../components/Input';
 
 import logoImg from '../../assets/logo.svg';
 
-
 interface SignInFormData {
   email: string;
   password: string;
