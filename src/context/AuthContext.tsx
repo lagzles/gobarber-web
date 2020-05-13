@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface SignInCredentials {
@@ -17,9 +17,9 @@ interface AuthContextTPO {
 }
 
 // hackzinho para burlar o typescript, e poder começar com name do contexto vazio
-export const AuthContext = createContext<AuthContextTPO>({} as AuthContextTPO);
+const AuthContext = createContext<AuthContextTPO>({} as AuthContextTPO);
 
-export const AuthProvider: React.FC = ({ children }) => {
+const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const user = localStorage.getItem('@goBarber:user');
     const token = localStorage.getItem('@goBarber:token');
@@ -49,4 +49,14 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-// export default AuthContext;
+function useAuth(): AuthContextTPO {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be use within an AuthProvider');
+  }
+
+  return context;
+}
+
+export { AuthProvider, useAuth };
