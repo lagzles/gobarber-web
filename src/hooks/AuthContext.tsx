@@ -14,6 +14,7 @@ interface AuthState {
 interface AuthContextTPO {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 // hackzinho para burlar o typescript, e poder começar com name do contexto vazio
@@ -42,8 +43,15 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@goBarber:user');
+    localStorage.removeItem('@goBarber:token');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
