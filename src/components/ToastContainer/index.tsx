@@ -6,7 +6,7 @@ import { Container, Toast } from './styles';
 const ToastContainer: React.FC = () => {
   return (
     <Container>
-      <Toast>
+      <Toast type="info" hasDescription>
         <FiAlertCircle size={21} />
         <div>
           <strong> Deu Merda</strong>
