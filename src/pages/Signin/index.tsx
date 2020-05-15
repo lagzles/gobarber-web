@@ -6,7 +6,7 @@ import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Container, Content, Background } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
 // hooks
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 // components
