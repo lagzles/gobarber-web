@@ -57,14 +57,14 @@ export const Toast = styled.div<ToastProps>`
       margin-top: 4px;
       font-size: 14px;
       opacity: 0.7;
-      line-height: 20px;
+      line-height: 18px;
     }
   }
 
   button {
     position: absolute;
     right: 16px;
-    top: 19px;
+    top: 16px;
     opacity: 0.6;
     border: 0;
     background: transparent;
