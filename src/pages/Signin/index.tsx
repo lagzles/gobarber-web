@@ -3,6 +3,7 @@ import { FormHandles } from '@unform/core';
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { Container, Content, Background } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
 // hooks
@@ -22,6 +23,7 @@ interface SignInFormData {
 }
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  // const history = useHistory();
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -81,10 +83,10 @@ const SignIn: React.FC = () => {
 
           <a href="forgot">Esqueci minha senha</a>
         </Form>
-        <a href="register">
+        <Link to="/signup">
           <FiLogIn />
           Criar Conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>
