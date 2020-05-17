@@ -27,14 +27,16 @@ const Route: React.FC<RouteProps> = ({
 
   return (
     <ReactDomRoute
-      {...rest} //todos as propriedades da rota/pagina
-      render={({ location }) => { // função que faz a verificação
+      {...rest} // todos as propriedades da rota/pagina
+      render={({ location }) => {
+        // função que faz a verificação
         return isPrivate === !!user ? (
-          <Component /> //caso OK, renderiza o componente
+          <Component /> // caso OK, renderiza o componente
         ) : (
             <Redirect // caso não ok, redireciona para outro endereço
               to={{
                 pathname: isPrivate ? '/' : '/dashboard',
+                // state pega o historico dos caminhos
                 state: { from: location },
               }}
             />
