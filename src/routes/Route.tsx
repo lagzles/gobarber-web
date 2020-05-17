@@ -12,6 +12,12 @@ interface RouteProps extends ReactDomRouteProps {
   component: React.ComponentType;
 }
 
+// isPrivate/Logado
+// true/true = OK
+// true/false = Redirecionar para login
+// false/false = Redirecionar para Dashboard
+// false/false = OK
+
 const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   component: Component,
@@ -21,12 +27,12 @@ const Route: React.FC<RouteProps> = ({
 
   return (
     <ReactDomRoute
-      {...rest}
-      render={({ location }) => {
+      {...rest} //todos as propriedades da rota/pagina
+      render={({ location }) => { // função que faz a verificação
         return isPrivate === !!user ? (
-          <Component />
+          <Component /> //caso OK, renderiza o componente
         ) : (
-            <Redirect
+            <Redirect // caso não ok, redireciona para outro endereço
               to={{
                 pathname: isPrivate ? '/' : '/dashboard',
                 state: { from: location },
