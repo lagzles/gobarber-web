@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
+import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Button from '../../components/Button';
@@ -15,6 +16,8 @@ import logoImg from '../../assets/logo.svg';
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
+
   const handleSubmit = useCallback(async (data: object) => {
     try {
       formRef.current?.setErrors({});
@@ -28,10 +31,23 @@ const SignUp: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
+
+      addToast({
+        type: 'success',
+        title: 'Cadastrado Realizado!',
+        description: '',
+      });
+
     } catch (err) {
       const errors = getValidationErrors(err);
 
       formRef.current?.setErrors(errors);
+
+      addToast({
+        type: 'error',
+        title: 'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
+        description: '',
+      });
     }
   }, []);
 
