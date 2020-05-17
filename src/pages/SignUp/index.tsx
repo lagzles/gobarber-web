@@ -18,38 +18,41 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
 
-  const handleSubmit = useCallback(async (data: object) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: object) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome Obrigatório'),
-        email: Yup.string().required('E-mail Obrigatório').email(),
-        password: Yup.string().min(6, 'Mínimo 6 caracteres'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome Obrigatório'),
+          email: Yup.string().required('E-mail Obrigatório').email(),
+          password: Yup.string().min(6, 'Mínimo 6 caracteres'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      addToast({
-        type: 'success',
-        title: 'Cadastrado Realizado!',
-        description: '',
-      });
-    } catch (err) {
-      const errors = getValidationErrors(err);
+        addToast({
+          type: 'success',
+          title: 'Cadastrado Realizado!',
+          description: '',
+        });
+      } catch (err) {
+        const errors = getValidationErrors(err);
 
-      formRef.current?.setErrors(errors);
+        formRef.current?.setErrors(errors);
 
-      addToast({
-        type: 'error',
-        title:
-          'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
-        description: '',
-      });
-    }
-  }, []);
+        addToast({
+          type: 'error',
+          title:
+            'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
+          description: '',
+        });
+      }
+    },
+    [addToast],
+  );
 
   return (
     <Container>
