@@ -61,13 +61,13 @@ const SignUp: React.FC = () => {
 
         addToast({
           type: 'error',
-          title:
-            'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
-          description: '',
+          title: 'Erro no cadastro',
+          description:
+            'Por favor verifique o preenchimento dos campos necessarios',
         });
       }
     },
-    [addToast],
+    [history, addToast],
   );
 
   return (
