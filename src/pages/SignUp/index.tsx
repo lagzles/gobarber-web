@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 import { useToast } from '../../hooks/toast';
@@ -14,12 +15,18 @@ import Input from '../../components/Input';
 
 import logoImg from '../../assets/logo.svg';
 
+interface SignUpFormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(
-    async (data: object) => {
+    async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({});
 
@@ -32,6 +39,9 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+
+        // manda dados para o api, para cadastrar usuario
+        await api.post('/users', data);
 
         addToast({
           type: 'success',
