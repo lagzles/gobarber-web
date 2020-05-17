@@ -3,7 +3,7 @@ import { FormHandles } from '@unform/core';
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Content, AnimationContainer, Background } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
 // hooks
@@ -27,6 +27,7 @@ const SignIn: React.FC = () => {
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -45,6 +46,8 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+
+        history.push('/dashboard');
 
         addToast({
           type: 'success',
