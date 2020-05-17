@@ -37,7 +37,6 @@ const SignUp: React.FC = () => {
         title: 'Cadastrado Realizado!',
         description: '',
       });
-
     } catch (err) {
       const errors = getValidationErrors(err);
 
@@ -45,7 +44,8 @@ const SignUp: React.FC = () => {
 
       addToast({
         type: 'error',
-        title: 'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
+        title:
+          'Cadastro não realizado. Por favor verifique o preenchimento dos campos necessarios',
         description: '',
       });
     }
